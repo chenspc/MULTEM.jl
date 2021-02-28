@@ -1,0 +1,442 @@
+[system]
+# eP_Float = 1, eP_double = 2
+precision = 1
+# eD_CPU = 1, eD_GPU = 2
+device = 2
+# Number of Cores CPU (It will be used in the future)
+cpu_ncores = 1
+# # of CPU Threads
+cpu_nthreads = 1
+# Select GPU (for Multi-GPU Setups)
+gpu_device = 0
+
+[theory]
+[theory.electron_specimen_interaction]
+# eESIM_Multislice = 1, eESIM_Phase_Object = 2, eESIM_Weak_Phase_Object = 3
+model = 1
+# ePT_Doyle_0_4 = 1, ePT_Peng_0_4 = 2, ePT_Peng_0_12 = 3, ePT_Kirkland_0_12 = 4, ePT_Weickenmeier_0_12 = 5, ePT_Lobato_0_12 = 6
+potential_type = 6
+# eOM_Normal = 1, eOM_Advanced = 2
+operation_mode = 1
+# memory size to be used(Mb)
+memory_size = 0
+# 1: true, 0:false
+reverse_multislice = false
+
+[theory.electron_phonon_interaction]
+# ePM_Still_Atom = 1, ePM_Absorptive = 2, ePM_Frozen_Phonon = 3
+    # pn_model = 1
+model = 1
+    # pn_coh_contrib = 0
+coherence_contribution = false
+    # pn_single_conf = 0
+single_phonon_configuration = false
+# true: specific phonon configuration, false: number of frozen phonon configurations
+    # pn_nconf = 1
+number_of_configuration = 1
+# phonon dimensions (xyz)
+    # pn_dim = 110
+dimensions = 110
+# Random seed(frozen phonon)
+    # pn_seed = 300183
+seed = 300183
+
+[specimen]
+    # spec_atoms = []
+atoms = []
+# slice thickness
+    # spec_dz = 0.25
+dz = 0.25
+
+# simulation box length in x direction (Angstrom)
+    # spec_lx = 10.0
+lx = 10.0
+
+# simulation box length in y direction (Angstrom)
+    # spec_ly = 10.0
+ly = 10.0
+
+# simulation box length in z direction (Angstrom)
+    # spec_lz = 10.0
+lz = 10.0
+
+[specimen.crystal]
+# number of unit cell along a
+    # spec_cryst_na = 1
+na = 1
+# number of unit cell along b
+    # spec_cryst_nb = 1
+nb = 1
+# number of unit cell along c
+    # spec_cryst_nc = 1
+nc = 1
+# length along a (Å)
+    # spec_cryst_a = 0.0
+a = 0.0
+# length along b (Å)
+    # spec_cryst_b = 0.0
+b = 0.0
+# length along c (Å)
+    # spec_cryst_c = 0.0
+c = 0.0
+# reference position along x direction (Å)
+    # spec_cryst_x0 = 0.0
+x0 = 0.0
+# reference position along y direction (Å)
+    # spec_cryst_y0 = 0.0
+y0 = 0.0
+
+[specimen.amorphous]
+    # spec_amorp = struct('z_0', 0, 'z_e', 0, 'dz', 2.0)
+# Starting z position of the amorphous layer (Å)
+z0 = 0
+# Ending z position of the amorphous layer (Å)
+ze = 0
+# slice thick of the amorphous layer (Å)
+dz = 2.0
+
+[specimen.rotation]
+# angle (º)
+    # spec_rot_theta = 0.0
+theta = 0.0
+# unitary vector			
+    # spec_rot_u0 = [0.0, 0.0, 1.0]
+u0 = [0.0, 0.0, 1.0]
+# 1: geometric center, 2: User define		
+    # spec_rot_center_type = 1
+center_type = 1
+# rotation point
+    # spec_rot_center_p = [0.0, 0.0, 0.0]
+center_p = [0.0, 0.0, 0.0]
+
+[specimen.thickness]
+# eTT_Whole_Spec = 1, eTT_Through_Thick = 2, eTT_Through_Slices = 3
+    # thick_type = 1
+type = 1
+# Array of thickness (Angstrom)
+    # thick = 0.0
+thick_array = 0.0
+
+[specimen.potential_slicing]
+# ePS_Planes = 1, ePS_dz_Proj = 2, ePS_dz_Sub = 3, ePS_Auto = 4
+# potential_slicing = 1
+type = 1
+
+[specimen.xy_sampling]
+# number of pixels in x direction
+nx = 256.0
+# number of pixels in y direction
+ny = 256.0
+# Band-width limit, 1: true, 0:false
+    # bwl = 0
+band_width_limit = 0
+
+[simulation]
+# Simulation type
+# STEM=11, ISTEM=12, CBED=21, CBEI=22, 
+# ED=31, HRTEM=32, PED=41, HCTEM=42, 
+# EWFS=51, EWRS=52, EELS=61, EFTEM=62, 
+# ProbeFS=71, ProbeRS=72, PPFS=81, PPRS=82, 
+# TFFS=91, TFRS=92
+    # simulation_type = 52
+type = 52
+
+[optics]
+
+[optics.incident_wave]
+# Acceleration Voltage (keV)
+E_0 = 300.0
+# Polar angle (Angstrom)
+theta = 0.0
+# Azimuthal angle (Angstrom)
+phi = 0.0
+
+# 1: Plane_Wave, 2: Convergent_wave, 3:User_Define, 4: auto
+    # iw_type = 4
+type = 4
+# User defined incident wave. It will be only used if iw_type=3
+    # iw_psi = 0.0
+psi = 0.0
+# x position 
+    # iw_x = 0.0
+x = 0.0
+# y position
+    # iw_y = 0.0
+y = 0.0
+
+[optics.illumination]
+# 1: coherente mode, 2: Partial coherente mode, 3: transmission cross coefficient, 4: Numerical integration
+model = 3
+# 1: Temporal and Spatial, 2: Temporal, 3: Spatial
+    # temporal_spatial_incoh = 1
+incoherence_mode = 1
+
+[optics.condenser_lens]
+# Vortex momentum
+    # m = 0.0
+vortex_momentum = 0.0
+
+[optics.condenser_lens.aberrations]
+# [C1]      Defocus (Angstrom)
+c_10 = 14.0312
+# [A1]      2-fold astigmatism (Angstrom)
+c_12 = 0.0
+# [phi_A1]	Azimuthal angle of 2-fold astigmatism (Angstrom)
+phi_12 = 0.0
+
+# [B2]      Axial coma (Angstrom)
+c_21 = 0.0
+# [phi_B2]	Azimuthal angle of axial coma (Angstrom)
+phi_21 = 0.0
+# [A2]      3-fold astigmatism (Angstrom)
+c_23 = 0.0
+# [phi_A2]	Azimuthal angle of 3-fold astigmatism (Angstrom)
+phi_23 = 0.0
+
+# [C3] 		3rd order spherical aberration (mm)
+c_30 = 1e-3
+# [S3]      Axial star aberration (Angstrom)
+c_32 = 0.0
+# [phi_S3]	Azimuthal angle of axial star aberration (Angstrom)
+phi_32 = 0.0
+# [A3]      4-fold astigmatism (Angstrom)
+c_34 = 0.0
+# [phi_A3]	Azimuthal angle of 4-fold astigmatism (Angstrom)
+phi_34 = 0.0
+
+# [B4]      4th order axial coma (Angstrom)
+c_41 = 0.0
+# [phi_B4]	Azimuthal angle of 4th order axial coma (Angstrom)
+phi_41 = 0.0
+# [D4]      3-lobe aberration (Angstrom)
+c_43 = 0.0
+# [phi_D4]	Azimuthal angle of 3-lobe aberration (Angstrom)
+phi_43 = 0.0
+# [A4]      5-fold astigmatism (Angstrom)
+c_45 = 0.0
+# [phi_A4]	Azimuthal angle of 5-fold astigmatism (Angstrom)
+phi_45 = 0.0
+
+# [C5]      5th order spherical aberration (mm)
+c_50 = 0.0
+# [S5]      5th order axial star aberration (Angstrom)
+c_52 = 0.0
+# [phi_S5]	Azimuthal angle of 5th order axial star aberration (Angstrom)
+phi_52 = 0.0
+# [R5]      5th order rosette aberration (Angstrom)
+c_54 = 0.0
+# [phi_R5]	Azimuthal angle of 5th order rosette aberration (Angstrom)
+phi_54 = 0.0
+# [A5]      6-fold astigmatism (Angstrom)
+c_56 = 0.0
+# [phi_A5]	Azimuthal angle of 6-fold astigmatism (Angstrom)
+phi_56 = 0.0
+
+# Inner aperture (mrad) 
+inner_aperture_angle = 0.0
+# Outer aperture (mrad)
+outer_aperture_angle = 21.0
+
+[optics.condenser_lens.source_spread_function]
+# Height proportion of a normalized Gaussian [0, 1]
+    # cond_lens_si_a = 1.0       
+a = 1.0       
+# standard deviation: For parallel ilumination(Angstrom^-1), otherwise (Angstrom)
+    # cond_lens_si_sigma = 0.072
+sigma = 0.072
+# Standard deviation of the source spread function for the Exponential component: For parallel ilumination(Angstrom^-1), otherwise (Angstrom)
+    # cond_lens_si_beta = 0.0
+beta = 0.0
+# Number of radial integration points. It will be only used if illumination_model=4
+    # cond_lens_si_rad_npts = 4
+radial_integration_npoints = 4
+# Number of azimuthal integration points. It will be only used if illumination_model=4
+    # cond_lens_si_azm_npts = 4
+azimuthal_integration_npoints = 4
+
+[optics.condenser_lens.defocus_spread_function]
+# Height proportion of a normalized Gaussian [0, 1]
+    # cond_lens_ti_a = 1.0
+a = 1.0
+# standard deviation (Angstrom)
+    # cond_lens_ti_sigma = 32.0
+sigma = 32.0
+# Standard deviation of the defocus spread for the Exponential component
+    # cond_lens_ti_beta = 0.0
+beta = 0.0
+# # of integration points. It will be only used if illumination_model=4
+    # cond_lens_ti_npts = 10
+integration_npoints = 10
+
+[optics.condenser_lens.zero_defocus_reference]
+# eZDT_First = 1, eZDT_User_Define = 4
+type = 1
+# It will be only used if cond_lens_zero_defocus_type = eZDT_User_Define
+plane = 0.0
+
+[optics.objective_lens]
+# Vortex momentum
+vortex_momentum = 0.0
+
+[optics.objective_lens.aberrations]
+# [C1]      Defocus (Angstrom)
+c_10 = 14.0312
+# [A1]      2-fold astigmatism (Angstrom)
+c_12 = 0.0
+# [phi_A1]	Azimuthal angle of 2-fold astigmatism (Angstrom)
+phi_12 = 0.0
+
+# [B2]      Axial coma (Angstrom)
+c_21 = 0.0
+# [phi_B2]	Azimuthal angle of axial coma (Angstrom)
+phi_21 = 0.0
+# [A2]      3-fold astigmatism (Angstrom)
+c_23 = 0.0
+# [phi_A2]	Azimuthal angle of 3-fold astigmatism (Angstrom)
+phi_23 = 0.0
+
+# [C3] 		3rd order spherical aberration (mm)
+c_30 = 0.01
+# [S3]      Axial star aberration (Angstrom)
+c_32 = 0.0
+# [phi_S3]	Azimuthal angle of axial star aberration (Angstrom)
+phi_32 = 0.0
+# [A3]      4-fold astigmatism (Angstrom)
+c_34 = 0.0
+# [phi_A3]	Azimuthal angle of 4-fold astigmatism (Angstrom)
+phi_34 = 0.0
+
+# [B4]      4th order axial coma (Angstrom)
+c_41 = 0.0
+# [phi_B4]	Azimuthal angle of 4th order axial coma (Angstrom)
+phi_41 = 0.0
+# [D4]      3-lobe aberration (Angstrom)
+c_43 = 0.0
+# [phi_D4]	Azimuthal angle of 3-lobe aberration (Angstrom)
+phi_43 = 0.0
+# [A4]      5-fold astigmatism (Angstrom)
+c_45 = 0.0
+# [phi_A4]	Azimuthal angle of 5-fold astigmatism (Angstrom)
+phi_45 = 0.0
+
+# [C5]      5th order spherical aberration (mm)
+c_50 = 0.0
+# [S5]      5th order axial star aberration (Angstrom)
+c_52 = 0.0
+# [phi_S5]	Azimuthal angle of 5th order axial star aberration (Angstrom)
+phi_52 = 0.0
+# [R5]      5th order rosette aberration (Angstrom)
+c_54 = 0.0
+# [phi_R5]	Azimuthal angle of 5th order rosette aberration (Angstrom)
+phi_54 = 0.0
+# [A5]      6-fold astigmatism (Angstrom)
+c_56 = 0.0
+# [phi_A5]	Azimuthal angle of 6-fold astigmatism (Angstrom)
+phi_56 = 0.0
+
+# Inner aperture (mrad) 
+    # inner_aper_ang = 0.0
+inner_aperture_angle = 0.0
+# Outer aperture (mrad)
+    # outer_aper_ang = 24.0
+outer_aperture_angle = 24.0
+
+[optics.objective_lens.defocus_spread_function]
+# standard deviation (Angstrom)
+sigma = 32.0
+# Number of integration points. It will be only used if illumination_model=4
+integration_npoints = 10
+
+[optics.objective_lens.zero_defocus_reference]
+# eZDT_First = 1, eZDT_Middle = 2, eZDT_Last = 3, eZDT_User_Define = 4
+    # obj_lens_zero_defocus_type = 1
+type = 1
+    # obj_lens_zero_defocus_plane = 0.0
+plane = 0.0
+
+
+[optics.detector]
+# STEM Detector 
+    # detector = multem_input.detector
+# detector_type: eDT_Circular = 1, eDT_Radial = 2, eDT_Matrix = 3
+type = 1
+# Inner & Outer angle(mrad) 
+    # cir = struct('inner_ang', 60, 'outer_ang', 180);                        
+inner_angle = 60
+outer_angle = 180
+
+# TODO: Read matrix files (.mat, .bin, .npy, .h5 etc.) for sensitivity map
+# radial detector angle(mrad) & radial sensitivity value
+radial_sensitivity = 0                                       
+# matrix sensitivity value
+matrix_sensitivity = 0     
+
+[optics.scanning_area]
+# Used for ISTEM/STEM/EELS
+
+# eST_Line = 1, eST_Area = 2
+type = 2
+# 1: true, 0:false (periodic boundary conditions)
+periodic_boundary_conditions = false
+# 0: false, 1: true
+square_pixel = true
+# number of sampling points
+sampling_npoints = 10
+# x-starting point (Angstrom)
+x0 = 0.0
+# y-starting point (Angstrom)
+y0 = 0.0
+# x-final point (Angstrom)
+xe = 4.078
+# y-final point (Angstrom)
+ye = 4.078
+
+[simulation.pet]
+# Number of orientations
+nrotations = 360.0
+# Precession angle (degrees)
+theta = 3.0
+
+[simulation.hci]
+# number of orientations
+nrotations = 360.0
+# Precession angle (degrees)
+theta = 3.0
+
+[simulation.eels]
+# atomic type
+    # eels_Z = 79
+atomic_number = 79
+# Energy loss (eV)
+E_loss = 80.0
+# Collection half angle (mrad)
+collection_angle = 100.0
+# selection rule
+m_selection = 3.0
+# eCT_Single_Channelling = 1, eCT_Mixed_Channelling = 2, eCT_Double_Channelling = 3 
+channelling_type = 1
+
+[simulation.eftem]
+# atomic type
+    # eftem_Z = 79
+atomic_number = 79
+# Energy loss (eV)
+E_loss = 80.0
+# Collection half angle (mrad)
+collection_angle = 100.0
+# selection rule
+m_selection = 3.0
+# eCT_Single_Channelling = 1, eCT_Mixed_Channelling = 2, eCT_Double_Channelling = 3 
+channelling_type = 1
+
+[simulation.output_region]
+# This option is not used for STEM and EELS ####
+
+# x-starting in pixel
+ix_0 = 0.0
+# y-starting in pixel
+iy_0 = 0.0
+# x-final in pixel
+ix_e = 0.0
+# y-final in pixel
+iy_e = 0.0
