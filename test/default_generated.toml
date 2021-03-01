@@ -1,0 +1,209 @@
+[system]
+cpu_nthreads = 1
+cpu_ncores = 1
+device = 2
+gpu_device = 0
+precision = 1
+
+[theory.electron_phonon_interaction]
+model = 1
+coherence_contribution = false
+single_phonon_configuration = false
+number_of_configuration = 1
+dimensions = 110
+seed = 300183
+
+[theory.electron_specimen_interaction]
+reverse_multislice = false
+model = 1
+memory_size = 0
+operation_mode = 1
+potential_type = 6
+
+[simulation]
+type = 52
+
+    [simulation.output_region]
+    ix_0 = 0.0
+    iy_0 = 0.0
+    ix_e = 0.0
+    iy_e = 0.0
+
+    [simulation.hci]
+    theta = 3.0
+    nrotations = 360.0
+
+    [simulation.eels]
+    atomic_number = 79
+    collection_angle = 100.0
+    m_selection = 3.0
+    E_loss = 80.0
+    channelling_type = 1
+
+    [simulation.pet]
+    theta = 3.0
+    nrotations = 360.0
+
+    [simulation.eftem]
+    atomic_number = 79
+    collection_angle = 100.0
+    m_selection = 3.0
+    E_loss = 80.0
+    channelling_type = 1
+
+[specimen]
+lx = 10.0
+ly = 10.0
+lz = 10.0
+dz = 0.25
+potential_slicing = 1
+atoms = []
+
+    [specimen.rotation]
+    theta = 0.0
+    center_type = 1
+    center_p = [0.0, 0.0, 0.0]
+    u0 = [0.0, 0.0, 1.0]
+
+    [specimen.thickness]
+    thick_array = [0.0]
+    type = 1
+
+    [specimen.amorphous]
+    z0 = 0
+    ze = 0
+    dz = 2.0
+
+    [specimen.crystal]
+    na = 1
+    nb = 1
+    nc = 1
+    a = 0.0
+    b = 0.0
+    c = 0.0
+    x0 = 0.0
+    y0 = 0.0
+
+    [specimen.xy_sampling]
+    nx = 256
+    ny = 256
+    band_width_limit = 0
+
+[instrument.incident_wave]
+acceleration_voltage = 300.0
+theta = 0.0
+phi = 0.0
+type = 4
+psi = 0.0
+x = 0.0
+y = 0.0
+
+[instrument.illumination]
+model = 3
+incoherence_mode = 1
+
+[instrument.objective_lens]
+vortex_momentum = 0.0
+
+    [instrument.objective_lens.aberrations]
+    c_10 = 14.0312
+    c_12 = 0.0
+    phi_12 = 0.0
+    c_21 = 0.0
+    phi_21 = 0.0
+    c_23 = 0.0
+    phi_23 = 0.0
+    c_30 = 0.001
+    c_32 = 0.0
+    phi_32 = 0.0
+    c_34 = 0.0
+    phi_34 = 0.0
+    c_41 = 0.0
+    phi_41 = 0.0
+    c_43 = 0.0
+    phi_43 = 0.0
+    c_45 = 0.0
+    phi_45 = 0.0
+    c_50 = 0.0
+    c_52 = 0.0
+    phi_52 = 0.0
+    c_54 = 0.0
+    phi_54 = 0.0
+    c_56 = 0.0
+    phi_56 = 0.0
+    inner_aperture_angle = 0.0
+    outer_aperture_angle = 24.0
+
+    [instrument.objective_lens.defocus_spread_function]
+    sigma = 32.0
+    integration_npoints = 10
+
+    [instrument.objective_lens.zero_defocus_reference]
+    type = 1
+    plane = 0.0
+
+[instrument.scanning_area]
+type = 2
+periodic_boundary_conditions = false
+square_pixel = true
+sampling_npoints = 10
+x0 = 0.0
+y0 = 0.0
+xe = 4.078
+ye = 4.078
+
+[instrument.condenser_lens]
+vortex_momentum = 0.0
+
+    [instrument.condenser_lens.aberrations]
+    c_10 = 14.0312
+    c_12 = 0.0
+    phi_12 = 0.0
+    c_21 = 0.0
+    phi_21 = 0.0
+    c_23 = 0.0
+    phi_23 = 0.0
+    c_30 = 0.001
+    c_32 = 0.0
+    phi_32 = 0.0
+    c_34 = 0.0
+    phi_34 = 0.0
+    c_41 = 0.0
+    phi_41 = 0.0
+    c_43 = 0.0
+    phi_43 = 0.0
+    c_45 = 0.0
+    phi_45 = 0.0
+    c_50 = 0.0
+    c_52 = 0.0
+    phi_52 = 0.0
+    c_54 = 0.0
+    phi_54 = 0.0
+    c_56 = 0.0
+    phi_56 = 0.0
+    inner_aperture_angle = 0.0
+    outer_aperture_angle = 21.0
+
+    [instrument.condenser_lens.defocus_spread_function]
+    a = 1.0
+    beta = 1.0
+    sigma = 32.0
+    integration_npoints = 10
+
+    [instrument.condenser_lens.source_spread_function]
+    a = 1.0
+    sigma = 0.072
+    beta = 1.0
+    radial_integration_npoints = 4
+    azimuthal_integration_npoints = 4
+
+    [instrument.condenser_lens.zero_defocus_reference]
+    type = 1
+    plane = 0.0
+
+[instrument.detector]
+type = 1
+inner_angle = 60
+outer_angle = 180
+radial_sensitivity = 0
+matrix_sensitivity = 0
