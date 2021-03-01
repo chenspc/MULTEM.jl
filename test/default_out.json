@@ -1,0 +1,226 @@
+{
+    "system": {
+        "cpu_nthreads": 1,
+        "cpu_ncores": 1,
+        "device": "eD_GPU",
+        "gpu_device": 0,
+        "precision": "eP_Float"
+    },
+    "theory": {
+        "electron_phonon_interaction": {
+            "model": "ePM_Still_Atom",
+            "coherence_contribution": false,
+            "single_phonon_configuration": false,
+            "number_of_configuration": 1,
+            "dimensions": 110,
+            "seed": 300183
+        },
+        "electron_specimen_interaction": {
+            "reverse_multislice": false,
+            "model": "eESIM_Multislice",
+            "memory_size": 0,
+            "operation_mode": "eOM_Normal",
+            "potential_type": "ePT_Lobato_0_12"
+        }
+    },
+    "simulation": {
+        "output_region": {
+            "ix_0": 0.0,
+            "iy_0": 0.0,
+            "ix_e": 0.0,
+            "iy_e": 0.0
+        },
+        "hci": {
+            "theta": 3.0,
+            "nrotations": 360.0
+        },
+        "eels": {
+            "atomic_number": 79,
+            "collection_angle": 100.0,
+            "m_selection": 3.0,
+            "E_loss": 80.0,
+            "channelling_type": 1
+        },
+        "pet": {
+            "theta": 3.0,
+            "nrotations": 360.0
+        },
+        "eftem": {
+            "atomic_number": 79,
+            "collection_angle": 100.0,
+            "m_selection": 3.0,
+            "E_loss": 80.0,
+            "channelling_type": 1
+        },
+        "type": "eST_EWRS"
+    },
+    "specimen": {
+        "rotation": {
+            "theta": 0.0,
+            "center_type": 1,
+            "center_p": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "u0": [
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "thickness": {
+            "thick_array": [
+                0.0
+            ],
+            "type": "eTT_Whole_Spec"
+        },
+        "amorphous": {
+            "z0": 0,
+            "ze": 0,
+            "dz": 2.0
+        },
+        "lx": 10.0,
+        "ly": 10.0,
+        "lz": 10.0,
+        "dz": 0.25,
+        "crystal": {
+            "na": 1,
+            "nb": 1,
+            "nc": 1,
+            "a": 0.0,
+            "b": 0.0,
+            "c": 0.0,
+            "x0": 0.0,
+            "y0": 0.0
+        },
+        "xy_sampling": {
+            "nx": 256,
+            "ny": 256,
+            "band_width_limit": 0
+        },
+        "potential_slicing": "ePS_Planes",
+        "atoms": []
+    },
+    "instrument": {
+        "incident_wave": {
+            "acceleration_voltage": 300.0,
+            "theta": 0.0,
+            "phi": 0.0,
+            "type": "eIWT_Auto_Wave",
+            "psi": 0.0,
+            "x": 0.0,
+            "y": 0.0
+        },
+        "illumination": {
+            "model": "eIM_Transmission_Cross_Coefficient",
+            "incoherence_mode": "eIIM_Temporal_And_Spatial_Incoherence"
+        },
+        "objective_lens": {
+            "vortex_momentum": 0.0,
+            "aberrations": {
+                "c_10": 14.0312,
+                "c_12": 0.0,
+                "phi_12": 0.0,
+                "c_21": 0.0,
+                "phi_21": 0.0,
+                "c_23": 0.0,
+                "phi_23": 0.0,
+                "c_30": 0.001,
+                "c_32": 0.0,
+                "phi_32": 0.0,
+                "c_34": 0.0,
+                "phi_34": 0.0,
+                "c_41": 0.0,
+                "phi_41": 0.0,
+                "c_43": 0.0,
+                "phi_43": 0.0,
+                "c_45": 0.0,
+                "phi_45": 0.0,
+                "c_50": 0.0,
+                "c_52": 0.0,
+                "phi_52": 0.0,
+                "c_54": 0.0,
+                "phi_54": 0.0,
+                "c_56": 0.0,
+                "phi_56": 0.0,
+                "inner_aperture_angle": 0.0,
+                "outer_aperture_angle": 24.0
+            },
+            "defocus_spread_function": {
+                "sigma": 32.0,
+                "integration_npoints": 10
+            },
+            "zero_defocus_reference": {
+                "type": "eZDT_First",
+                "plane": 0.0
+            }
+        },
+        "scanning_area": {
+            "type": "eST_Area",
+            "periodic_boundary_conditions": false,
+            "square_pixel": true,
+            "sampling_npoints": 10,
+            "x0": 0.0,
+            "y0": 0.0,
+            "xe": 4.078,
+            "ye": 4.078
+        },
+        "condenser_lens": {
+            "vortex_momentum": 0.0,
+            "aberrations": {
+                "c_10": 14.0312,
+                "c_12": 0.0,
+                "phi_12": 0.0,
+                "c_21": 0.0,
+                "phi_21": 0.0,
+                "c_23": 0.0,
+                "phi_23": 0.0,
+                "c_30": 0.001,
+                "c_32": 0.0,
+                "phi_32": 0.0,
+                "c_34": 0.0,
+                "phi_34": 0.0,
+                "c_41": 0.0,
+                "phi_41": 0.0,
+                "c_43": 0.0,
+                "phi_43": 0.0,
+                "c_45": 0.0,
+                "phi_45": 0.0,
+                "c_50": 0.0,
+                "c_52": 0.0,
+                "phi_52": 0.0,
+                "c_54": 0.0,
+                "phi_54": 0.0,
+                "c_56": 0.0,
+                "phi_56": 0.0,
+                "inner_aperture_angle": 0.0,
+                "outer_aperture_angle": 21.0
+            },
+            "defocus_spread_function": {
+                "a": 1.0,
+                "beta": 1.0,
+                "sigma": 32.0,
+                "integration_npoints": 10
+            },
+            "source_spread_function": {
+                "a": 1.0,
+                "sigma": 0.072,
+                "beta": 1.0,
+                "radial_integration_npoints": 4,
+                "azimuthal_integration_npoints": 4
+            },
+            "zero_defocus_reference": {
+                "type": "eZDT_First",
+                "plane": 0.0
+            }
+        },
+        "detector": {
+            "type": "eDT_Circular",
+            "inner_angle": 60,
+            "outer_angle": 180,
+            "radial_sensitivity": 0,
+            "matrix_sensitivity": 0
+        }
+    }
+}
