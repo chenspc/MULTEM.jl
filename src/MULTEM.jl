@@ -4,17 +4,13 @@ using Configurations: @option, from_dict, to_dict, to_toml
 
 import Configurations: toml_convert
 import FieldMetadata: @description, description
+import Base: convert
 
 export from_dict, to_dict, to_toml
 export MULTEMInput 
 export System, Theory, Simulation, Specimen, Instrument 
-export ElectronPhononInteraction, ElectronSpecimenInteraction, IncidentWave, Illumination, Aberrations, DefocusSpreadFunction, ZeroDefocusReference, ObjectiveLens, SourceSpreadFunction, CondenserLens, ScanningArea, Detector, Rotation, Thickness, Amorphous, Crystal, XYSampling, Atom, OutputRegion, HCI, EELS, PET, EFTEM
-export Precision, Device, ElectronSpecimenInteractionModel, PotentialType, OperationMode, PhononModel, ThicknessType, PotentialSlicing, SimulationType, IncidentWaveType, IlluminationModel, IlluminationIncoherenceMode, ScanningType, ZeroDefocusType, DetectorType
-
-
-
-toml_convert(::Type, x::T) where {T<:Enum} = string(x)
-# toml_convert(::Type, x::T) where T<:Enum = Int(x)
+# export ElectronPhononInteraction, ElectronSpecimenInteraction, IncidentWave, Illumination, Aberrations, DefocusSpreadFunction, ZeroDefocusReference, ObjectiveLens, SourceSpreadFunction, CondenserLens, ScanningArea, Detector, Rotation, Thickness, Amorphous, Crystal, XYSampling, Atom, OutputRegion, HCI, EELS, PET, EFTEM
+# export Precision, Device, ElectronSpecimenInteractionModel, PotentialType, OperationMode, PhononModel, ThicknessType, PotentialSlicing, SimulationType, IncidentWaveType, IlluminationModel, IlluminationIncoherenceMode, ScanningType, ZeroDefocusType, DetectorType
 
 @enum Precision begin
     eP_Float = 1
@@ -136,11 +132,10 @@ end
     eCT_User = 2
 end
 
-# @option struct ElectronPhononInteraction
-#     model::PhononModel = ePM_Still_Atom 
-#     coherence_contribution::Bool = false    
-#     single_phonon_configuration::Bool = false   
-# end
+MULTEMEnum = Union{Precision, Device, ElectronSpecimenInteractionModel, PotentialType, OperationMode, PhononModel, ThicknessType, PotentialSlicing, SimulationType, IncidentWaveType, IlluminationModel, IlluminationIncoherenceMode, ScanningType, ZeroDefocusType, DetectorType}
+# toml_convert(::Type, x::T) where T<:MULTEMEnum = string(x)
+toml_convert(::Type, x::T) where T<:MULTEMEnum = Int(x)
+convert(::Type{T}, x::Int) where T<:MULTEMEnum = T(x)
 
 @description @option struct ElectronPhononInteraction
     model::PhononModel = ePM_Still_Atom | ""
@@ -161,7 +156,7 @@ end
     potential_type::PotentialType = ePT_Lobato_0_12
 end
 
-"Theory"
+"EM Theory"
 @option struct Theory
     electron_phonon_interaction::ElectronPhononInteraction = ElectronPhononInteraction()
     electron_specimen_interaction::ElectronSpecimenInteraction =
@@ -172,7 +167,7 @@ end
     acceleration_voltage::Real = 300.0 | "Acceleration Voltage (keV)"
     theta::Real = 0.0 | "Polar angle (°)"
     phi::Real = 0.0 | "Azimuthal angle (°)"
-    type::IncidentWaveType = eIWT_Plane_Wave | ""
+    type::IncidentWaveType = eIWT_Auto_Wave | ""
     psi::Real = 0.0 | ""
     x::Real = 0.0 | ""
     y::Real = 0.0 | ""
@@ -194,7 +189,7 @@ end
     c_23::Real = 0.0
     phi_23::Real = 0.0
 
-    c_30::Real = 0.01
+    c_30::Real = 0.001
     c_32::Real = 0.0
     phi_32::Real = 0.0
     c_34::Real = 0.0
@@ -214,11 +209,32 @@ end
     phi_54::Real = 0.0
     c_56::Real = 0.0
     phi_56::Real = 0.0
+    
+    inner_aperture_angle::Real = 0.0
+    outer_aperture_angle::Real = 21.0
+    
 end
 
-@option struct DefocusSpreadFunction
+@option struct ObjectiveLensDefocusSpreadFunction
     sigma::Real = 32.0
     integration_npoints::Int = 10
+end
+
+@option struct CondenserLensDefocusSpreadFunction
+    # `a` and `beta` only for condenser lens???
+    a::Real = 1.0
+    beta::Real = 1.0
+
+    sigma::Real = 32.0
+    integration_npoints::Int = 10
+end
+
+@option struct SourceSpreadFunction
+    a::Real = 1.0
+    sigma::Real = 0.072
+    beta::Real = 1.0
+    radial_integration_npoints::Int = 4
+    azimuthal_integration_npoints::Int = 4
 end
 
 @option struct ZeroDefocusReference
@@ -229,24 +245,16 @@ end
 @option struct ObjectiveLens
     vortex_momentum::Real = 0.0
     aberrations::Aberrations = Aberrations()
-    defocus_spread_fuction::DefocusSpreadFunction = DefocusSpreadFunction()
+    defocus_spread_function::ObjectiveLensDefocusSpreadFunction = ObjectiveLensDefocusSpreadFunction()
     zero_defocus_reference::ZeroDefocusReference = ZeroDefocusReference()
-end
-
-@option struct SourceSpreadFunction
-    a::Real = 1.0
-    sigma::Real = 0.072
-    beta::Real = 0.0
-    radial_integration_npoints::Int = 4
-    azimuthal_integration_npoints::Int = 4
 end
 
 
 @option struct CondenserLens
     vortex_momentum::Real = 0.0
     aberrations::Aberrations = Aberrations()
-    defocus_spread_fuction::DefocusSpreadFunction = DefocusSpreadFunction()
-    source_spread_fuction::SourceSpreadFunction = SourceSpreadFunction()
+    defocus_spread_function::CondenserLensDefocusSpreadFunction = CondenserLensDefocusSpreadFunction()
+    source_spread_function::SourceSpreadFunction = SourceSpreadFunction()
     zero_defocus_reference::ZeroDefocusReference = ZeroDefocusReference()
 end
 
@@ -313,6 +321,7 @@ end
 @option struct XYSampling
     nx::Int = 256
     ny::Int = 256
+    band_width_limit::Real = 0.0
 end
 
 @option struct Atom
@@ -381,7 +390,7 @@ end
     eels::EELS = EELS()
     pet::PET = PET()
     eftem::EFTEM = EFTEM()
-    type::SimulationType = eST_HRTEM
+    type::SimulationType = eST_EWRS
 end
 
 
@@ -391,7 +400,7 @@ end
     cpu_ncores::Int = 1
     device::Device = eD_GPU
     gpu_device::Int = 0
-    precision::Precision = eP_Double
+    precision::Precision = eP_Float
 end
 
 "MULTEM Input"

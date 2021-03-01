@@ -60,6 +60,12 @@ ly = 10.0
     # spec_lz = 10.0
 lz = 10.0
 
+
+# [specimen.potential_slicing]
+# ePS_Planes = 1, ePS_dz_Proj = 2, ePS_dz_Sub = 3, ePS_Auto = 4
+potential_slicing = 1
+# type = 1
+
 [specimen.crystal]
 # number of unit cell along a
     # spec_cryst_na = 1
@@ -115,12 +121,7 @@ center_p = [0.0, 0.0, 0.0]
 type = 1
 # Array of thickness (Angstrom)
     # thick = 0.0
-thick_array = 0.0
-
-[specimen.potential_slicing]
-# ePS_Planes = 1, ePS_dz_Proj = 2, ePS_dz_Sub = 3, ePS_Auto = 4
-# potential_slicing = 1
-type = 1
+thick_array = [0.0]
 
 [specimen.xy_sampling]
 # number of pixels in x direction
@@ -141,11 +142,11 @@ band_width_limit = 0
     # simulation_type = 52
 type = 52
 
-[optics]
+[instrument]
 
-[optics.incident_wave]
+[instrument.incident_wave]
 # Acceleration Voltage (keV)
-E_0 = 300.0
+acceleration_voltage = 300.0
 # Polar angle (Angstrom)
 theta = 0.0
 # Azimuthal angle (Angstrom)
@@ -164,19 +165,19 @@ x = 0.0
     # iw_y = 0.0
 y = 0.0
 
-[optics.illumination]
+[instrument.illumination]
 # 1: coherente mode, 2: Partial coherente mode, 3: transmission cross coefficient, 4: Numerical integration
 model = 3
 # 1: Temporal and Spatial, 2: Temporal, 3: Spatial
     # temporal_spatial_incoh = 1
 incoherence_mode = 1
 
-[optics.condenser_lens]
+[instrument.condenser_lens]
 # Vortex momentum
     # m = 0.0
 vortex_momentum = 0.0
 
-[optics.condenser_lens.aberrations]
+[instrument.condenser_lens.aberrations]
 # [C1]      Defocus (Angstrom)
 c_10 = 14.0312
 # [A1]      2-fold astigmatism (Angstrom)
@@ -237,7 +238,7 @@ inner_aperture_angle = 0.0
 # Outer aperture (mrad)
 outer_aperture_angle = 21.0
 
-[optics.condenser_lens.source_spread_function]
+[instrument.condenser_lens.source_spread_function]
 # Height proportion of a normalized Gaussian [0, 1]
     # cond_lens_si_a = 1.0       
 a = 1.0       
@@ -246,7 +247,7 @@ a = 1.0
 sigma = 0.072
 # Standard deviation of the source spread function for the Exponential component: For parallel ilumination(Angstrom^-1), otherwise (Angstrom)
     # cond_lens_si_beta = 0.0
-beta = 0.0
+beta = 1.0
 # Number of radial integration points. It will be only used if illumination_model=4
     # cond_lens_si_rad_npts = 4
 radial_integration_npoints = 4
@@ -254,7 +255,7 @@ radial_integration_npoints = 4
     # cond_lens_si_azm_npts = 4
 azimuthal_integration_npoints = 4
 
-[optics.condenser_lens.defocus_spread_function]
+[instrument.condenser_lens.defocus_spread_function]
 # Height proportion of a normalized Gaussian [0, 1]
     # cond_lens_ti_a = 1.0
 a = 1.0
@@ -263,22 +264,22 @@ a = 1.0
 sigma = 32.0
 # Standard deviation of the defocus spread for the Exponential component
     # cond_lens_ti_beta = 0.0
-beta = 0.0
+beta = 1.0
 # # of integration points. It will be only used if illumination_model=4
     # cond_lens_ti_npts = 10
 integration_npoints = 10
 
-[optics.condenser_lens.zero_defocus_reference]
+[instrument.condenser_lens.zero_defocus_reference]
 # eZDT_First = 1, eZDT_User_Define = 4
 type = 1
 # It will be only used if cond_lens_zero_defocus_type = eZDT_User_Define
 plane = 0.0
 
-[optics.objective_lens]
+[instrument.objective_lens]
 # Vortex momentum
 vortex_momentum = 0.0
 
-[optics.objective_lens.aberrations]
+[instrument.objective_lens.aberrations]
 # [C1]      Defocus (Angstrom)
 c_10 = 14.0312
 # [A1]      2-fold astigmatism (Angstrom)
@@ -296,7 +297,7 @@ c_23 = 0.0
 phi_23 = 0.0
 
 # [C3] 		3rd order spherical aberration (mm)
-c_30 = 0.01
+c_30 = 0.001
 # [S3]      Axial star aberration (Angstrom)
 c_32 = 0.0
 # [phi_S3]	Azimuthal angle of axial star aberration (Angstrom)
@@ -341,13 +342,13 @@ inner_aperture_angle = 0.0
     # outer_aper_ang = 24.0
 outer_aperture_angle = 24.0
 
-[optics.objective_lens.defocus_spread_function]
+[instrument.objective_lens.defocus_spread_function]
 # standard deviation (Angstrom)
 sigma = 32.0
 # Number of integration points. It will be only used if illumination_model=4
 integration_npoints = 10
 
-[optics.objective_lens.zero_defocus_reference]
+[instrument.objective_lens.zero_defocus_reference]
 # eZDT_First = 1, eZDT_Middle = 2, eZDT_Last = 3, eZDT_User_Define = 4
     # obj_lens_zero_defocus_type = 1
 type = 1
@@ -355,7 +356,7 @@ type = 1
 plane = 0.0
 
 
-[optics.detector]
+[instrument.detector]
 # STEM Detector 
     # detector = multem_input.detector
 # detector_type: eDT_Circular = 1, eDT_Radial = 2, eDT_Matrix = 3
@@ -371,7 +372,7 @@ radial_sensitivity = 0
 # matrix sensitivity value
 matrix_sensitivity = 0     
 
-[optics.scanning_area]
+[instrument.scanning_area]
 # Used for ISTEM/STEM/EELS
 
 # eST_Line = 1, eST_Area = 2
