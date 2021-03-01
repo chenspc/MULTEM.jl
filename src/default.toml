@@ -340,7 +340,7 @@ phi_56 = 0.0
 inner_aperture_angle = 0.0
 # Outer aperture (mrad)
     # outer_aper_ang = 24.0
-outer_aperture_angle = 24.0
+outer_aperture_angle = 21.0
 
 [instrument.objective_lens.defocus_spread_function]
 # standard deviation (Angstrom)
