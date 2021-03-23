@@ -11,11 +11,11 @@ TOML = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [compat]
-Configurations = "0.11, 0.12"
 FieldMetadata = "0.3"
-JSON = "0.21"
-TOML = "1.0"
 YAML = "0.4"
+Configurations = "0.11"
+TOML = "1.0"
+JSON = "0.21"
 julia = "1.5"
 
 [extras]
